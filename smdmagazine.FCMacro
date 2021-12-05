@@ -1,0 +1,19 @@
+# smdmagazine Export Script
+config_depth = [10, 20]
+config_slot = [1.5, 2, 3, 4, 5]
+
+for depth in config_depth:
+	for slot in config_slot:
+		# Configure 3D
+		App.getDocument('smdmagazine').getObject('Spreadsheet').set('TapeDepth', str(depth))
+		App.getDocument('smdmagazine').getObject('Spreadsheet').set('TapeSlot', str(slot))
+		App.getDocument('smdmagazine').getObject('Spreadsheet').recompute()
+		App.getDocument('smdmagazine').recompute()
+		# Export
+		__objs__=[]
+		__objs__.append(FreeCAD.getDocument("smdmagazine").getObject("Pocket"))
+		import Mesh
+		filename = u"{}-{}-{}.stl".format(os.path.splitext(App.ActiveDocument.FileName)[0] , depth, slot)
+		Mesh.export(__objs__, filename)
+		print("Exported {}".format(filename))
+		del __objs__
