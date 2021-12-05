@@ -11,7 +11,7 @@ for depth in config_depth:
 		App.getDocument('smdmagazine').recompute()
 		# Export
 		__objs__=[]
-		__objs__.append(FreeCAD.getDocument("smdmagazine").getObject("Pocket"))
+		__objs__.append(FreeCAD.getDocument("smdmagazine").getObject("Pocket001"))
 		import Mesh
 		filename = u"{}-{}-{}.stl".format(os.path.splitext(App.ActiveDocument.FileName)[0] , depth, slot)
 		Mesh.export(__objs__, filename)
